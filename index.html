@@ -1,48 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-  <meta charset="UTF-8">
-  <head>
-    <title>Ruffle Dynamic Player</title>
-    <script src="ruffle/ruffle.js"> </script>
-    <script>
-      function createParam(name, value) {
-        const param = document.createElement('param');
-        param.setAttribute('name', name);
-        param.setAttribute('value', value);
-        return param;
-      }
-      function fillGame() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const data = urlParams.get('swf');
-        const game = document.createElement('object');
-        game.setAttribute('data', data);
-        game.setAttribute('type', 'application/x-shockwave-flash');
-        game.setAttribute('width', '100%');
-        game.setAttribute('height', '100%');
-        game.appendChild(createParam('wmode', 'direct'));
-        game.appendChild(createParam('allowscriptaccess', 'always'));
-        game.appendChild(createParam('allowfullscreen', 'true'));
-        game.appendChild(createParam('allowfullscreeninteractive', 'true'));
-        game.appendChild(createParam('allownetworkingmode', 'all'));
-        document.body.appendChild(game);
-      }
-      if (document.readyState != 'loading') {
-        fillGame();
-      } else {
-        document.addEventListener("DOMContentLoaded", fillGame)
-      }
-    </script>
-    <style>
-      * {
-        margin: 0;
-      }
-      :root, body, object {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-  </body>
-</html>
+<head>
+	<meta name="viewport"
+		content="height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+	<title>AwayFL Dynamic Player</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		canvas {
+			outline: none
+		}
+		html, body {
+			margin: 0;
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			background-color: white;
+		}
+	</style>
+	<script src="awayfl/loader.js"></script>
+</head>
+
+<body>
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		var swfName = urlParams.get('swf');
+		if (!swfName) {
+			swfName = 'default.swf';
+		}
+		const config = {
+			width: 550,
+			height: 400,
+			splash: 'awayfl/todo.jpg',
+			progress: { // optional
+				back: 'cover url(awayfl/progressBg.jpg)',
+				line: 'awayfl/progressLine.jpg', // or image, it will passed to progressLine background,
+				rect: [0, 0.9, 1, 0.1] // x, y, width, height of preogress line relative contianer 
+			},
+			baseUrl: 'awayfl',
+			runtime: ['awayfl/runtime.js'],
+			binary: [{
+				path: swfName,
+				resourceType: 'GAME',
+				name: 'Game', // not used atm
+				meta: {} // not used atm
+			}],
+		}
+
+		window.addEventListener("load", () => {
+			AWAYFL.LegacyLoader.init(config);
+			AWAYFL.LegacyLoader.runGame((fill) => {
+				window.dispatchEvent(new CustomEvent('awayfl-player-progress', {detail: fill}));
+			}, (config, hideLoader) => {
+				const player = new AWAYFL.Player(document, config);
+				window.dispatchEvent(new CustomEvent('awayfl-player-init', {detail: player}));
+				player
+					.loadAndPlay()
+					.then((_, hide) => {
+						window.dispatchEvent(new CustomEvent('awayfl-player-load'));
+						hide && hide();
+					});				
+			})
+		});
+	</script>
+</body>
