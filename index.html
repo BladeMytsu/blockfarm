@@ -1,67 +1,26 @@
-<!DOCTYPE html>
-<head>
-	<meta name="viewport"
-		content="height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
-	<title>AwayFL Dynamic Player</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		canvas {
-			outline: none
-		}
-		html, body {
-			margin: 0;
-			overflow: hidden;
-			width: 100%;
-			height: 100%;
-			background-color: white;
-		}
-	</style>
-	<script src="awayfl/loader.js"></script>
-</head>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset='utf8'>
+    </head>
+    <body>
+        <div id='ruffle'></div>
+        <script src='https://e9x.github.io/ruffle/ruffle.js'></script>
+        <script>
+var swfobject = {};
 
-<body>
-	<script>
-		const urlParams = new URLSearchParams(window.location.search);
-		var swfName = urlParams.get('swf');
-		if (!swfName) {
-			swfName = 'default.swf';
-		}
-		const config = {
-			width: 550,
-			height: 400,
-			splash: 'awayfl/todo.jpg',
-			progress: { // optional
-				back: 'cover url(awayfl/progressBg.jpg)',
-				line: 'awayfl/progressLine.jpg', // or image, it will passed to progressLine background,
-				rect: [0, 0.9, 1, 0.1] // x, y, width, height of preogress line relative contianer 
-			},
-			baseUrl: 'awayfl',
-			runtime: ['awayfl/runtime.js'],
-			binary: [{
-				path: swfName,
-				resourceType: 'GAME',
-				name: 'Game', // not used atm
-				meta: {} // not used atm
-			}],
-		}
+swfobject.embedSWF = function(url, cont, width, height){
+    var ruffle = window.RufflePlayer.newest(),
+        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+            width: width,
+            height: height,
+            style: 'width: ' + width + 'px; height: ' + height + 'px',
+        });
+    
+    player.load({ url: url });
+}
 
-		window.addEventListener("load", () => {
-			AWAYFL.LegacyLoader.init(config);
-			AWAYFL.LegacyLoader.runGame((fill) => {
-				window.dispatchEvent(new CustomEvent('awayfl-player-progress', {detail: fill}));
-			}, (config, hideLoader) => {
-				const player = new AWAYFL.Player(document, config);
-				window.dispatchEvent(new CustomEvent('awayfl-player-init', {detail: player}));
-				player
-					.loadAndPlay()
-					.then((_, hide) => {
-						window.dispatchEvent(new CustomEvent('awayfl-player-load'));
-						hide && hide();
-					});				
-			})
-		});
-	</script>
-</body>
+swfobject.embedSWF('https://e9x.github.io/ruffle/1on1soccer_24.swf', 'ruffle', 500, 500);
+        </script>
+    </body>
+</html>
