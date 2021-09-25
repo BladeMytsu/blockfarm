@@ -31,7 +31,6 @@ var swfobject = {};
 swfobject.embedSWF = function(url, cont, width, height){
     var ruffle = window.RufflePlayer.newest(),
         player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-            autoplay: "auto"
 	width: width,
             height: height,
             style: 'width: ' + width + 'px; height: ' + height + 'px',
@@ -39,8 +38,7 @@ swfobject.embedSWF = function(url, cont, width, height){
     
     player.load({ url: url });
 	
-	window.RufflePlayer.config = {
-    autoplay: "auto"
+
 };
 	
 	
