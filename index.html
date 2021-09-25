@@ -43,27 +43,13 @@ swfobject.embedSWF = function(url, cont, width, height){
         });
     
     player.load({ url: url });
+	
 }
 
 swfobject.embedSWF('default.swf', 'ruffle', 1000, 620);
         </script>
 	    
 	    
-	    <script src="./ruffle.js"></script>
-		<script>
-			window.RufflePlayer.config = {
-contextMenu : false
-}
-			window.addEventListener("load", function(e) {
-				window.RufflePlayer = window.RufflePlayer || {};
-				window.RufflePlayer.config = {autoplay: "auto"};
-				const ruffle = window.RufflePlayer.newest();
-				var player = ruffle.createPlayer();
-				player.classList.add("gembed");
-				document.body.appendChild(player);
-				player.load({url: "default.swf"});
-			}, false);
-		</script>
 	    
 	    
 	    
