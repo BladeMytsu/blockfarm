@@ -19,6 +19,11 @@ swfobject.embedSWF = function(url, cont, width, height){
     
     player.load({ url: url });
 }
+            <script>
+window.RufflePlayer.config = {
+    autoplay: "auto"
+};
+</script>
 
 swfobject.embedSWF('default.swf', 'ruffle', 1000, 620);
         </script>
