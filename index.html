@@ -4,7 +4,7 @@
         <meta charset='utf8'>
     </head>
     <body>
-        <title>Block Farm - Simulador de Farm</title>
+ <title>Block Farm - Simulador de Farm</title>
 	<style>
 		* {
 			margin: 0;
@@ -18,11 +18,7 @@
 			background-color: #1F2937;
 		}
 	</style>
-        
-	    
-	   
-	    
-	    
+        background-color: 1;
         <div id='ruffle'></div>
         <script src='ruffle/ruffle.js'></script>
         <script>
@@ -31,25 +27,21 @@ var swfobject = {};
 swfobject.embedSWF = function(url, cont, width, height){
     var ruffle = window.RufflePlayer.newest(),
         player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-	width: width,
+            width: width,
             height: height,
             style: 'width: ' + width + 'px; height: ' + height + 'px',
         });
     
     player.load({ url: url });
-	
-
-};
-	
-	
 }
-		
 
 swfobject.embedSWF('default.swf', 'ruffle', 1000, 620);
         </script>
 	    
-	    <a href='https://www.symptoma.pt/pt/info/covid-19#info'>Síntomas de coronavirus</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=8225e3284c36dbf7a9b3e8310cb422df99aaf9a9'></script>
-<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/870887/t/2"></script>
+	    <!-- Start of SimpleHitCounter Code -->
+<div align="center"><a href="http://www.simplehitcounter.com" target="_blank"><img src="http://simplehitcounter.com/hit.php?uid=928211496&f=16777215&b=0" border="0" height="18" width="83" alt="web counter"></a><br><a href="http://www.simplehitcounter.com" target="_blank" style="text-decoration:none;">web counter</a></div>
+<!-- End of SimpleHitCounter Code -->
+
 	    
 	    
     </body>
