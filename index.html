@@ -48,6 +48,23 @@ swfobject.embedSWF = function(url, cont, width, height){
 swfobject.embedSWF('default.swf', 'ruffle', 1000, 620);
         </script>
 	    
+	    
+	    <script src="./ruffle.js"></script>
+		<script>
+			window.addEventListener("load", function(e) {
+				window.RufflePlayer = window.RufflePlayer || {};
+				window.RufflePlayer.config = {autoplay: "auto"};
+				const ruffle = window.RufflePlayer.newest();
+				var player = ruffle.createPlayer();
+				player.classList.add("gembed");
+				document.body.appendChild(player);
+				player.load({url: "default.swf"});
+			}, false);
+		</script>
+	    
+	    
+	    
+	    
 	    <div id="sfcx2uy9xbq4sk394xmfaff283y3ghhxbz4"></div><script type="text/javascript" src="https://counter10.stat.ovh/private/counter.js?c=x2uy9xbq4sk394xmfaff283y3ghhxbz4&down=async" async></script><br><a href="https://www.webcontadores.com">contador para blogger</a><noscript><a href="https://www.webcontadores.com" title="contador para blogger"><img src="https://counter10.stat.ovh/private/webcontadores.php?c=x2uy9xbq4sk394xmfaff283y3ghhxbz4" border="0" title="contador para blogger" alt="contador para blogger"></a></noscript>
 
 	    
