@@ -43,6 +43,13 @@ swfobject.embedSWF = function(url, cont, width, height){
             height: height,
             style: 'width: ' + width + 'px; height: ' + height + 'px',
         });
+	
+	
+	window.RufflePlayer.config = {
+    "autoplay": "on",
+    "unmuteOverlay": "hidden",
+    "contextMenu": false,
+}
     
     player.load({ url: url });
 	
